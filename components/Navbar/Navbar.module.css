@@ -1,0 +1,79 @@
+.bigdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.pictures {
+  height: 40px;
+  object-fit:contain;
+}
+
+.profile {
+  height: 40px;
+  width: 40px; /* Add width to make it a square */
+  object-fit:fill;
+  border-radius: 50%; /* Make it circular */
+}
+
+.search{
+    height: 30px;
+    object-fit:contain;
+
+}
+
+.rounded {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 20px; /* Adjust the value to control roundness */
+    padding: 8px; /* Add padding for better appearance */
+}
+
+.inputsearch{
+     vertical-align: "middle";
+     border: 0px ;
+
+}
+
+.verticalLine {
+    width: 2px;
+    height: 100%; /* Adjust the height of the line as needed */
+    background-color: #ccc; /* Set the color of the line */
+    margin: 0 10px; /* Optional margin to add space around the line */
+}
+
+.smalldivs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginbutton{
+  height: 30px;
+  width: 100px;
+  object-fit: contain;
+  color: orangered;
+  background-color: #fff;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.loginbutton:hover {
+  background-color: orangered;
+  color: #fff;
+}
+
+.addgif{
+  height: 30px;
+  width: 100px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.addgif:hover {
+  background-color: #999;
+}

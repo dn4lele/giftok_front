@@ -1,0 +1,46 @@
+.post{
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 3px #ccc;
+    width: 300px;
+    text-align: center;
+}
+
+.post__header{
+    display: flex;
+    justify-content: right;
+    align-items: center; /* Align items vertically */
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+.Post_img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+}
+.post__caption{
+    display: flex;
+}
+.post__like_comment{
+    display: flex;
+    justify-content: right;
+    margin: 5px;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+}
+
+.rounded {
+    height: 40px;
+    width: 40px; /* Add width to make it a square */
+    object-fit:fill;
+    border-radius: 50%; /* Make it circular */
+}
+
+  

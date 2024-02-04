@@ -1,0 +1,42 @@
+.post{
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 3px #ccc;
+    width: 300px;
+    text-align: center;
+    
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    
+}
+
+.hide{
+    display: none;
+}
+
+.post:hover .hide{
+    display: block;
+}
+
+.posts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.Profilepic{
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
