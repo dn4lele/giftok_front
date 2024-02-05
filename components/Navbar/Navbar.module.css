@@ -23,6 +23,12 @@
 
 }
 
+
+.search:hover{
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
 .rounded {
     display: flex;
     align-items: center;
@@ -76,4 +82,26 @@
 }
 .addgif:hover {
   background-color: #999;
+}
+
+
+.select{
+  height: 30px;
+  width: 100px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  background-color: gold;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

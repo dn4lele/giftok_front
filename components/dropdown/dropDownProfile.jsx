@@ -4,7 +4,7 @@ import { useUser } from "../UserContext";
 import { useRouter } from "next/router";
 
 const DropDownProfile = () => {
-  const { logoutUser } = useUser();
+  const { user, logoutUser } = useUser();
 
   const router = useRouter();
 
@@ -19,7 +19,9 @@ const DropDownProfile = () => {
     <>
       <div className={style.dropDownProfile}>
         <ul className={style.ul}>
-          <li onClick={() => router.push("/profile/profile")}>Profile</li>
+          <li onClick={() => router.push(`/prof/${user._id}/profile`)}>
+            Profile
+          </li>
           <li onClick={() => router.push("/usersetting/usersetting")}>
             Settings
           </li>

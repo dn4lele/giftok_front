@@ -43,4 +43,6 @@
     border-radius: 50%; /* Make it circular */
 }
 
-  
+  .pic{
+    object-fit: contain;
+  }

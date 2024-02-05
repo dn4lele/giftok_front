@@ -40,7 +40,7 @@ export default function AddPost() {
                 "http://localhost:3001/api/posts/addpost",
                 {
                   caption: caption,
-                  author: user.name,
+                  author: user._id,
                   gif: selectedpicture,
                   location: [latitude, longitude],
                 }

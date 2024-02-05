@@ -12,11 +12,24 @@ export default function Navbar() {
 
   const router = useRouter();
 
+  const [selectedOption, setSelectedOption] = useState("accounts");
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const [serach, setsearch] = useState("");
+  const handlesearch = () => {
+    if (selectedOption == "accounts") router.push(`/1/${serach}`);
+    else if (selectedOption == "gifcaption") router.push(`/2/${serach}`);
+    else if (selectedOption == "radios") router.push(`/3/${serach}`);
+  };
+
   useEffect(() => {
     if (user == null) {
       setshowstting(false);
     }
-  });
+  }, []);
 
   return (
     <>
@@ -26,6 +39,22 @@ export default function Navbar() {
           <Link href="/">
             <img src={"/logo.png"} alt="Logo" className={styles.pictures} />
           </Link>
+          {user && (
+            <>
+              <button
+                onClick={() => router.push("/top/1")}
+                className={styles.top}
+              >
+                top following person you follow
+              </button>
+              <button
+                onClick={() => router.push("/top/2")}
+                className={styles.top}
+              >
+                top liked post also you liked
+              </button>
+            </>
+          )}
         </div>
 
         <div className={styles.rounded}>
@@ -34,6 +63,7 @@ export default function Navbar() {
             type="text"
             placeholder="Search"
             className={styles.inputsearch}
+            onChange={(e) => setsearch(e.target.value)}
           />
 
           <div className={styles.verticalLine}></div>
@@ -42,7 +72,20 @@ export default function Navbar() {
             src={"/search black.png"}
             alt="search logo"
             className={styles.search}
+            onClick={() => handlesearch()}
           />
+
+          <div>
+            <select
+              value={selectedOption}
+              onChange={handleChange}
+              className={styles.select}
+            >
+              <option value="accounts">accounts</option>
+              <option value="gifcaption">gif caption</option>
+              <option value="radios">radios</option>
+            </select>
+          </div>
         </div>
 
         <div className={styles.smalldivs}>
@@ -50,7 +93,7 @@ export default function Navbar() {
           {user && (
             <button
               className={styles.addgif}
-              onClick={() => router.push("AddPost/AddPost")}
+              onClick={() => router.push("/AddPost/AddPost")}
             >
               <img
                 src={"/plus.png"}

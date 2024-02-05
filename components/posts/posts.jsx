@@ -2,19 +2,24 @@ import React, { useEffect } from "react";
 import style from "./posts.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Post = ({ username, caption, gif, logedInUser, id }) => {
   const [postuserpic, setpostuserpic] = useState(null);
+  const [user_name, setusername] = useState(null);
 
   const [liked, setLiked] = useState(false);
+
+  const router = useRouter();
 
   //need to get the username picture that he uploaded the gif
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(
-        `http://localhost:3001/api/users/getuserpic/${username}`
+        `http://localhost:3001/api/users/getuserpicandname/${username}`
       );
-      setpostuserpic(response.data);
+      setpostuserpic(response.data[0]);
+      setusername(response.data[1]);
     };
 
     const fatchlike = async () => {
@@ -43,12 +48,12 @@ const Post = ({ username, caption, gif, logedInUser, id }) => {
   return (
     <div className={style.post}>
       <div className={style.post__header}>
-        <h3>{username}</h3>
+        <h3>{user_name}</h3>
         <img className={style.rounded} src={postuserpic}></img>
       </div>
 
       <div className={style.Post_img}>
-        <img src={gif} alt="Post" />
+        <img src={gif} alt="Post" className={style.pic} />
 
         <h4 className={style.post__caption}>{caption}</h4>
       </div>
@@ -62,7 +67,9 @@ const Post = ({ username, caption, gif, logedInUser, id }) => {
             >
               Like
             </button>
-            <button>Comment</button>
+            <button onClick={() => router.push(`/comment/${id}/comment`)}>
+              Comment
+            </button>
           </>
         )}
       </div>

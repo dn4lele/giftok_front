@@ -50,19 +50,13 @@ export default function Main() {
 
     // Call the function
     storeUserInSessionStorage();
-    fetchGifs();
+    fetchGifs(1);
   }, []);
 
   return (
     <>
       <Navbar />
       <div>{}</div>
-      <button
-        style={{ borderRadius: "50%", width: 100, height: 100 }}
-        onClick={() => fetchGifs(page)}
-      >
-        show next gif
-      </button>
 
       <center>
         {gif && (
@@ -74,6 +68,12 @@ export default function Main() {
             logedInUser={user}
           />
         )}
+        <button
+          style={{ borderRadius: "50%", width: 100, height: 100 }}
+          onClick={() => fetchGifs(page)}
+        >
+          show next gif
+        </button>
       </center>
     </>
   );
