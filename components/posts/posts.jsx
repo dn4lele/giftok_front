@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const Post = ({ username, caption, gif, logedInUser, id }) => {
   const [postuserpic, setpostuserpic] = useState(null);
   const [user_name, setusername] = useState(null);
+  const [userid, setuserid] = useState(null);
 
   const [liked, setLiked] = useState(false);
 
@@ -20,6 +21,7 @@ const Post = ({ username, caption, gif, logedInUser, id }) => {
       );
       setpostuserpic(response.data[0]);
       setusername(response.data[1]);
+      setuserid(response.data[2]);
     };
 
     const fatchlike = async () => {
@@ -47,7 +49,10 @@ const Post = ({ username, caption, gif, logedInUser, id }) => {
 
   return (
     <div className={style.post}>
-      <div className={style.post__header}>
+      <div
+        className={style.post__header}
+        onClick={() => router.push(`/prof/${userid}/profile`)}
+      >
         <h3>{user_name}</h3>
         <img className={style.rounded} src={postuserpic}></img>
       </div>

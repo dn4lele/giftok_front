@@ -14,7 +14,7 @@ export default function Profile() {
   const [logedinUser, setlogedinUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [profileuser, setProfileuser] = useState(null);
-  const [state, setstate] = useState(null);
+  const [state, setstate] = useState("unfollow");
 
   const fetchPosts = async () => {
     const response = await axios.get(
@@ -53,10 +53,12 @@ export default function Profile() {
     };
 
     //get the posts
-
     fetchUser();
+    console.log(user);
+    if (user != null) {
+      fatchwasfollow();
+    }
     fetchPosts();
-    fatchwasfollow();
   }, [profile_slug]);
 
   const handlefollow = async () => {
@@ -128,7 +130,7 @@ export default function Profile() {
                       <h5 className={style.hide}>likes:{post.likes.length}</h5>
                     )}
 
-                    {logedinUser._id == profile_slug && (
+                    {logedinUser && logedinUser._id == profile_slug && (
                       <button onClick={() => handledelete(post._id)}>
                         delete post
                       </button>
