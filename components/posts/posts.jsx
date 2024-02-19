@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const Post = ({ username, caption, gif, logedInUser, id }) => {
+const Post = ({ username, caption, gif, logedInUser, id, likesamount }) => {
   const [postuserpic, setpostuserpic] = useState(null);
   const [user_name, setusername] = useState(null);
   const [userid, setuserid] = useState(null);
@@ -68,11 +68,14 @@ const Post = ({ username, caption, gif, logedInUser, id }) => {
           <>
             <button
               onClick={() => addlike()}
-              style={{ backgroundColor: liked ? "red" : "white" }}
+              className={liked ? style.liked : style.nolike}
             >
               Like
             </button>
-            <button onClick={() => router.push(`/comment/${id}/comment`)}>
+            <button
+              onClick={() => router.push(`/comment/${id}/comment`)}
+              className={style.button_58}
+            >
               Comment
             </button>
           </>

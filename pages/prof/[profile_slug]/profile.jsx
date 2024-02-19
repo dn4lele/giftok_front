@@ -101,8 +101,26 @@ export default function Profile() {
                   {profileuser.following != null &&
                     profileuser.followers != null && (
                       <>
-                        <h3>followers:{profileuser.followers.length}</h3>
-                        <h3>following:{profileuser.following.length}</h3>
+                        <h3>
+                          followers:{profileuser.followers.length}
+                          <button className={style.showfoll}
+                            onClick={() => {
+                              router.push("/followers/" + profileuser._id);
+                            }}
+                          >
+                            show
+                          </button>
+                        </h3>
+                        <h3>
+                          following:{profileuser.following.length}
+                          <button className={style.showfoll}
+                            onClick={() => {
+                              router.push("/following/" + profileuser._id);
+                            }}
+                          >
+                            show
+                          </button>
+                        </h3>
                       </>
                     )}
                 </div>
@@ -110,9 +128,7 @@ export default function Profile() {
                 {logedinUser != null && logedinUser._id != profile_slug && (
                   <>
                     <button
-                      style={{
-                        backgroundColor: state == "follow" ? "white" : "red",
-                      }}
+                      className={state == "follow" ? style.follow : style.nofollow}
                       onClick={() => handlefollow()}
                     >
                       {state}
@@ -123,15 +139,36 @@ export default function Profile() {
 
               <div className={style.posts}>
                 {posts.map((post) => (
-                  <div className={style.post} key={post.id}>
-                    <img src={post.gif} alt={post.caption} />
+                  <div className={style.post} key={post._id}>
+                    <img
+                      src={post.gif}
+                      alt={post.caption}
+                      className={style.pic}
+                    />
                     <p>{post.description}</p>
                     {post != null && (
-                      <h5 className={style.hide}>likes:{post.likes.length}</h5>
+                      <>
+                        <h5 className={style.hide}>
+                          likes:{post.likes.length}
+                        </h5>
+                        <center>
+                          <button
+                            className={style.hidetwo}
+                            onClick={() => {
+                              router.push("/showpost/" + post._id);
+                            }}
+                          >
+                            show post
+                          </button>
+                        </center>
+                      </>
                     )}
 
                     {logedinUser && logedinUser._id == profile_slug && (
-                      <button onClick={() => handledelete(post._id)}>
+                      <button
+                        onClick={() => handledelete(post._id)}
+                        className={style.button_24}
+                      >
                         delete post
                       </button>
                     )}

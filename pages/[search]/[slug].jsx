@@ -58,11 +58,12 @@ export default function Search() {
           {" "}
           <h1>Users</h1>
           <div className={style.users}>
+            {data.length == 0 && <h1>No User Found</h1>}
             {data.map((user) => (
               <div className={style.singleuser}>
                 <h1>{user.name}</h1>
                 <img src={user.image} alt={user.name} />
-                <button
+                <button className={style.profbtn}
                   onClick={() => router.push(`/prof/${user._id}/profile`)}
                 >
                   see profile
@@ -76,6 +77,7 @@ export default function Search() {
         <>
           <h1>Gif By Text</h1>
           <div className={style.posts}>
+            {data.length == 0 && <h1>No Gif Found</h1>}
             {data.map((post) => (
               <div className={style.singlepost}>
                 <img src={post.gif} alt={post.caption} />
@@ -90,6 +92,7 @@ export default function Search() {
         <>
           <h1>Gif By radios</h1>
           <div className={style.posts}>
+            {data.length == 0 && <h1>No Gif Found</h1>}
             {data.map((post) => (
               <div className={style.singlepost}>
                 <img src={post.gif} alt={post.caption} />

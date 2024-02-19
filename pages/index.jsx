@@ -66,6 +66,7 @@ export default function Main() {
             caption={gif.description}
             gif={gif.gif}
             logedInUser={user}
+            likesamount={gif.likes.length}
           />
         )}
         <button

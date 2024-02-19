@@ -128,51 +128,89 @@ function UserSettings() {
         <div>
           <Navbar />
           <h1>User Settings</h1>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div>
+              <center>
+                <div className={style.coolinput}>
+                  <label for="input" className={style.text}>
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="name"
+                    name="input"
+                    value={name}
+                    className={style.input}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
 
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
+                <br />
+
+                <div className={style.coolinput}>
+                  <label for="input" className={style.text}>
+                    email:
+                  </label>
+                  <input
+                    className={style.input}
+                    type="email"
+                    placeholder="name"
+                    name="input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+
+                <br />
+
+                <div className={style.coolinput}>
+                  <label for="input" className={style.text}>
+                    password:
+                  </label>
+                  <input
+                    className={style.input}
+                    type="text"
+                    placeholder="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </center>
+            </div>
+
+            <br />
+            <br />
+
+            <center>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "10px",
+                }}
+              >
+                Profile Picture:
+                <img src={picture} alt="profile picture" />
+                <button
+                  onClick={() => setChangePicture(true)}
+                  className={style.changepic}
+                >
+                  change gif
+                </button>
+              </div>
+            </center>
+          </div>
 
           <br />
+          <center>
+            <button onClick={() => handleSubmit()} className={style.savebtn}>
+              Save
+            </button>
 
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-
-          <br />
-
-          <label>
-            Password:
-            <input
-              type="text"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-
-          <br />
-
-          <label>
-            Profile Picture:
-            <img src={picture} alt="profile picture" />
-            <button onClick={() => setChangePicture(true)}>change gif</button>
-          </label>
-
-          <br />
-
-          <button onClick={() => handleSubmit()}>Save</button>
-
-          <button onClick={() => deleteacc()}>delete account</button>
+            <button onClick={() => deleteacc()} className={style.deletebtn}>
+              delete account
+            </button>
+          </center>
         </div>
       )}
     </>
