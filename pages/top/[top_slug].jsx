@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/navbar";
 import axios from "axios";
 import { useUser } from "../../components/UserContext";
 import style from "./top.module.css";
+import Post from "../../components/posts/posts";
 
 export default function Top() {
   const router = useRouter();
@@ -37,7 +38,6 @@ export default function Top() {
         const result = await axios.get(
           `http://localhost:3001/api/posts/getmostliked/${usea._id}`
         );
-        console.log(result.data);
         setData(result.data);
       }
     }
@@ -67,12 +67,18 @@ export default function Top() {
       {top_slug == 2 && (
         <>
           <div className={style.posts}>
-            {data.map((post) => (
-              <div className={style.singlepost}>
-                <img src={post.gif} alt={post.caption} />
-                <p>{post.description}</p>
-                {post.likes != null && (
-                  <h5 className={style.hide}>likes:{post.likes.length}</h5>
+            {data.map((gif) => (
+              <div>
+                {gif != null && gif.author != null && (
+                  <>
+                    <Post
+                      id={gif._id}
+                      username={gif.author}
+                      caption={gif.description}
+                      gif={gif.gif}
+                      logedInUser={user}
+                    />
+                  </>
                 )}
               </div>
             ))}

@@ -16,10 +16,12 @@ export default function Comment() {
   const [allcomments, setAllcomments] = useState([]);
 
   async function getdata() {
-    const result = await axios.get(
-      `http://localhost:3001/api/posts/getpostbyid/${comment}`
-    );
-    setData(result.data);
+    if (comment != null) {
+      const result = await axios.get(
+        `http://localhost:3001/api/posts/getpostbyid/${comment}`
+      );
+      setData(result.data);
+    }
   }
 
   async function handlepostcomment() {
@@ -33,17 +35,16 @@ export default function Comment() {
   }
 
   async function getcomments() {
-    const result = await axios.get(
-      `http://localhost:3001/api/comments/getcomments/${comment}`
-    );
-    console.log(result.data);
-    setAllcomments(result.data);
+    if (comment != null) {
+      const result = await axios.get(
+        `http://localhost:3001/api/comments/getcomments/${comment}`
+      );
+      setAllcomments(result.data);
+    }
   }
 
   async function deletecomm(id) {
     if (confirm("Are you sure you want to delete this comment?")) {
-      console.log("deleting comment " + id);
-
       const response = await axios.delete(
         `http://localhost:3001/api/comments/delete/${id}`
       );
@@ -64,9 +65,10 @@ export default function Comment() {
       console.error("Error getting user", error);
     }
 
+    console.log("getting data" + comment);
     getdata();
     getcomments();
-  }, []);
+  }, [comment]);
 
   return (
     <div>
@@ -87,7 +89,6 @@ export default function Comment() {
           {allcomments.map((com) => (
             <>
               <div className={style.comment}>
-                {console.log(com.username + " " + com.text)}
                 <h3>{com.username}</h3>
                 <p>{com.text}</p>
                 {com.userid == user_log._id && (
@@ -109,7 +110,9 @@ export default function Comment() {
             placeholder="comment"
             onChange={(e) => setMycomm(e.target.value)}
           />
-          <button onClick={() => handlepostcomment()}>Submit</button>
+          <button onClick={() => handlepostcomment()} className={style.savebtn}>
+            Submit
+          </button>
         </div>
       </center>
     </div>

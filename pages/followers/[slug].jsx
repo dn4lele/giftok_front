@@ -24,13 +24,13 @@ export default function Search() {
     }
 
     async function getdata() {
-      console.log("slug", slug);
-      const result = await axios.get(
-        `http://localhost:3001/api/users/getfollowers/${slug}`
-      );
-      console.log(result.data);
+      if (slug != null) {
+        const result = await axios.get(
+          `http://localhost:3001/api/users/getfollowers/${slug}`
+        );
 
-      setData(result.data);
+        setData(result.data);
+      }
     }
     getdata();
   }, [slug]);
@@ -48,6 +48,7 @@ export default function Search() {
               <h1>{user.followers.name}</h1>
               <img src={user.followers.image} alt={user.followers.name} />
               <button
+                className={style.profbtn}
                 onClick={() =>
                   router.push(`/prof/${user.followers._id}/profile`)
                 }

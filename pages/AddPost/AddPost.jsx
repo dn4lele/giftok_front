@@ -105,8 +105,17 @@ export default function AddPost() {
       {selectgif == true && (
         <>
           <div className={style.header}>
-            <input type="text" onChange={(e) => setGifSearch(e.target.value)} />
-            <button onClick={() => getgifs(gifserach)}>search</button>
+            <input
+              type="text"
+              onChange={(e) => setGifSearch(e.target.value)}
+              className={style.inp}
+            />
+            <button
+              onClick={() => getgifs(gifserach)}
+              className={style.selectgifbtn}
+            >
+              search
+            </button>
           </div>
           <div className={style.allgifs}>
             {gifs != null && gifs.length == 0 && <h1>no gifs found</h1>}
@@ -135,7 +144,10 @@ export default function AddPost() {
           <div className={style.container}>
             <div className={style.selectgif}>
               <img className={style.thegif} src={selectedpicture}></img>
-              <button onClick={() => setselectgif(!selectgif)}>
+              <button
+                onClick={() => setselectgif(!selectgif)}
+                className={style.selectgifbtn}
+              >
                 select gif
               </button>
             </div>
@@ -149,7 +161,19 @@ export default function AddPost() {
               />
             </div>
 
-            <button onClick={() => handlepost()}>Submit</button>
+            <button onClick={() => handlepost()} className={style.savebtn}>
+              Submit
+            </button>
+          </div>
+          <div>
+            <center>
+              <button
+                className={style.button_24}
+                onClick={() => router.push("/")}
+              >
+                cancel
+              </button>
+            </center>
           </div>
         </div>
       )}

@@ -85,15 +85,6 @@
 }
 
 
-.select{
-  height: 30px;
-  width: 100px;
-  background-color: #ccc;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
 .top{
   display: flex;
@@ -104,4 +95,21 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* Assuming you have a class named "my-input" in your stylesheet (styles.css) */
+.select{
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  font-size: 14px;
+  border-radius: 8px; /* Use "lg" value for rounded corners */
+  outline: none; /* Remove default focus outline */
+  width: 100%;
+  padding: 10px; /* Adjust as needed */
+}
+
+/* Optional: Add focus styles */
+.select:focus {
+  border-color: #3b82f6; /* Blue border color */
+  box-shadow: 0 0 0 2px #3b82f6; /* Blue ring around the input */
 }

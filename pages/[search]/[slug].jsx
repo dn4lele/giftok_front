@@ -3,14 +3,29 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import style from "./search.module.css";
 import Navbar from "../../components/Navbar/navbar";
+import Post from "../../components/posts/posts";
+import { useUser } from "../../components/UserContext";
 
 export default function Search() {
   const router = useRouter();
   const { search, slug } = router.query;
 
   const [data, setData] = useState([]);
+  const { user, loginUser } = useUser();
 
   useEffect(() => {
+    let usea = null;
+    try {
+      const storedUser = sessionStorage.getItem("user");
+
+      if (!(storedUser == "null" || storedUser == null)) {
+        loginUser(JSON.parse(storedUser));
+        usea = JSON.parse(storedUser);
+      }
+    } catch (error) {
+      console.error("Error getting user", error);
+    }
+
     async function getdata() {
       if (search == "1") {
         const result = await axios.get(
@@ -63,7 +78,8 @@ export default function Search() {
               <div className={style.singleuser}>
                 <h1>{user.name}</h1>
                 <img src={user.image} alt={user.name} />
-                <button className={style.profbtn}
+                <button
+                  className={style.profbtn}
                   onClick={() => router.push(`/prof/${user._id}/profile`)}
                 >
                   see profile
@@ -79,11 +95,18 @@ export default function Search() {
           <div className={style.posts}>
             {data.length == 0 && <h1>No Gif Found</h1>}
             {data.map((post) => (
-              <div className={style.singlepost}>
-                <img src={post.gif} alt={post.caption} />
-                <p>{post.description}</p>
-                <h5 className={style.hide}>likes:{post.likes.length}</h5>
-              </div>
+              <>
+                <div style={{ padding: "5px" }}>
+                  <Post
+                    id={post._id}
+                    username={post.author}
+                    caption={post.description}
+                    gif={post.gif}
+                    logedInUser={user}
+                    likesamount={post.likes.length}
+                  />
+                </div>
+              </>
             ))}
           </div>
         </>
@@ -94,11 +117,18 @@ export default function Search() {
           <div className={style.posts}>
             {data.length == 0 && <h1>No Gif Found</h1>}
             {data.map((post) => (
-              <div className={style.singlepost}>
-                <img src={post.gif} alt={post.caption} />
-                <p>{post.description}</p>
-                <h5 className={style.hide}>likes:{post.likes.length}</h5>
-              </div>
+              <>
+                <div style={{ padding: "5px" }}>
+                  <Post
+                    id={post._id}
+                    username={post.author}
+                    caption={post.description}
+                    gif={post.gif}
+                    logedInUser={user}
+                    likesamount={post.likes.length}
+                  />
+                </div>
+              </>
             ))}
           </div>
         </>

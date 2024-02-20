@@ -17,10 +17,13 @@ export default function Profile() {
   const [state, setstate] = useState("unfollow");
 
   const fetchPosts = async () => {
-    const response = await axios.get(
-      `http://localhost:3001/api/posts/getpostbyuserid/${profile_slug}`
-    );
-    setPosts(response.data);
+    if (profile_slug != null) {
+      const response = await axios.get(
+        `http://localhost:3001/api/posts/getpostbyuserid/${profile_slug}`
+      );
+
+      setPosts(response.data);
+    }
   };
 
   useEffect(() => {
@@ -52,9 +55,7 @@ export default function Profile() {
       else setstate("follow");
     };
 
-    //get the posts
     fetchUser();
-    console.log(user);
     if (user != null) {
       fatchwasfollow();
     }
@@ -103,7 +104,8 @@ export default function Profile() {
                       <>
                         <h3>
                           followers:{profileuser.followers.length}
-                          <button className={style.showfoll}
+                          <button
+                            className={style.showfoll}
                             onClick={() => {
                               router.push("/followers/" + profileuser._id);
                             }}
@@ -113,7 +115,8 @@ export default function Profile() {
                         </h3>
                         <h3>
                           following:{profileuser.following.length}
-                          <button className={style.showfoll}
+                          <button
+                            className={style.showfoll}
                             onClick={() => {
                               router.push("/following/" + profileuser._id);
                             }}
@@ -128,7 +131,9 @@ export default function Profile() {
                 {logedinUser != null && logedinUser._id != profile_slug && (
                   <>
                     <button
-                      className={state == "follow" ? style.follow : style.nofollow}
+                      className={
+                        state == "follow" ? style.follow : style.nofollow
+                      }
                       onClick={() => handlefollow()}
                     >
                       {state}

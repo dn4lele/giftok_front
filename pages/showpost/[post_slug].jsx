@@ -20,14 +20,13 @@ export default function post() {
       if (!(storedUser == "null" || storedUser == null)) {
         loginUser(JSON.parse(storedUser));
         usea = JSON.parse(storedUser);
-      } else {
-        router.push("/Log_in_Sign_up/LoginSignup");
       }
     } catch (error) {
       console.error("Error getting user", error);
     }
     getpost();
     async function getpost() {
+      if (post_slug == null) return;
       const result = await axios.get(
         `http://localhost:3001/api/posts/getpostbyid/${post_slug}`
       );
