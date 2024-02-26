@@ -3,7 +3,7 @@ import { useUser } from "../../components/UserContext";
 import { useRouter } from "next/router";
 import axios from "axios";
 import style from "./usersetting.module.css";
-import Navbar from "../../components/Navbar/navbar";
+import Layout from "../../components/layout";
 
 function UserSettings() {
   const { user, loginUser } = useUser();
@@ -126,7 +126,6 @@ function UserSettings() {
 
       {changepicture == false && (
         <div>
-          <Navbar />
           <h1>User Settings</h1>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div>
@@ -218,3 +217,7 @@ function UserSettings() {
 }
 
 export default UserSettings;
+
+UserSettings.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

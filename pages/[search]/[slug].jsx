@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import style from "./search.module.css";
-import Navbar from "../../components/Navbar/navbar";
+import Layout from "../../components/layout";
 import Post from "../../components/posts/posts";
 import { useUser } from "../../components/UserContext";
 
@@ -67,7 +67,6 @@ export default function Search() {
 
   return (
     <>
-      <Navbar />
       {search == 1 && (
         <>
           {" "}
@@ -136,3 +135,7 @@ export default function Search() {
     </>
   );
 }
+
+Search.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

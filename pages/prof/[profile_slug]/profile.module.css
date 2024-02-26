@@ -1,11 +1,8 @@
 .post{
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 3px #ccc;
-    width: 300px;
+    width: auto;
     text-align: center;
-    
 }
 .header {
     display: flex;

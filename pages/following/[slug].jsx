@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import style from "./following.module.css";
-import Navbar from "../../components/Navbar/navbar";
+import Layout from "../../components/layout";
 
 export default function Search() {
   const router = useRouter();
@@ -37,8 +37,6 @@ export default function Search() {
 
   return (
     <>
-      <Navbar />
-
       <>
         <h1>following</h1>
         <div className={style.users}>
@@ -62,3 +60,6 @@ export default function Search() {
     </>
   );
 }
+Search.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

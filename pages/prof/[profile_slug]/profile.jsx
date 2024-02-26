@@ -3,7 +3,8 @@ import axios from "axios";
 import { useUser } from "../../../components/UserContext";
 import { useRouter } from "next/router";
 import style from "./profile.module.css";
-import Navbar from "../../../components/Navbar/navbar";
+import Layout from "../../../components/layout";
+import Post from "../../../components/posts/posts";
 
 export default function Profile() {
   const router = useRouter();
@@ -83,7 +84,6 @@ export default function Profile() {
 
   return (
     <>
-      <Navbar />
       <>
         {profileuser != null && (
           <>
@@ -144,40 +144,27 @@ export default function Profile() {
 
               <div className={style.posts}>
                 {posts.map((post) => (
-                  <div className={style.post} key={post._id}>
-                    <img
-                      src={post.gif}
-                      alt={post.caption}
-                      className={style.pic}
-                    />
-                    <p>{post.description}</p>
-                    {post != null && (
-                      <>
-                        <h5 className={style.hide}>
-                          likes:{post.likes.length}
-                        </h5>
-                        <center>
-                          <button
-                            className={style.hidetwo}
-                            onClick={() => {
-                              router.push("/showpost/" + post._id);
-                            }}
-                          >
-                            show post
-                          </button>
-                        </center>
-                      </>
-                    )}
+                  <>
+                    <div className={style.post} key={post._id}>
+                      <Post
+                        id={post._id}
+                        username={post.author}
+                        caption={post.description}
+                        gif={post.gif}
+                        logedInUser={user}
+                        likesamount={post.likes.length}
+                      />
 
-                    {logedinUser && logedinUser._id == profile_slug && (
-                      <button
-                        onClick={() => handledelete(post._id)}
-                        className={style.button_24}
-                      >
-                        delete post
-                      </button>
-                    )}
-                  </div>
+                      {logedinUser && logedinUser._id == profile_slug && (
+                        <button
+                          onClick={() => handledelete(post._id)}
+                          className={style.button_24}
+                        >
+                          delete post
+                        </button>
+                      )}
+                    </div>
+                  </>
                 ))}
               </div>
             </div>
@@ -187,3 +174,6 @@ export default function Profile() {
     </>
   );
 }
+Profile.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

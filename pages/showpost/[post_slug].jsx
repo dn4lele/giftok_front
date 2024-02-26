@@ -5,6 +5,7 @@ import axios from "axios";
 import { useUser } from "../../components/UserContext";
 import style from "./showpost.module.css";
 import Post from "../../components/posts/posts";
+import Layout from "../../components/layout";
 
 export default function post() {
   const router = useRouter();
@@ -37,7 +38,6 @@ export default function post() {
 
   return (
     <>
-      <Navbar />
       <h1>post </h1>
       <center>
         {data && (
@@ -47,9 +47,13 @@ export default function post() {
             caption={data.description}
             gif={data.gif}
             logedInUser={user}
+            likesamount={data.likes.length}
           />
         )}
       </center>
     </>
   );
 }
+post.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

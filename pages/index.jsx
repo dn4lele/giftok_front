@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Post from "../components/posts/posts";
 import { useUser } from "../components/UserContext";
+import Layout from "../components/layout";
 
 export default function Main() {
   const { user, loginUser } = useUser();
@@ -55,19 +56,18 @@ export default function Main() {
 
   return (
     <>
-      <Navbar />
-      <div>{}</div>
-
       <center>
         {gif && (
-          <Post
-            id={gif._id}
-            username={gif.author}
-            caption={gif.description}
-            gif={gif.gif}
-            logedInUser={user}
-            likesamount={gif.likes.length}
-          />
+          <>
+            <Post
+              id={gif._id}
+              username={gif.author}
+              caption={gif.description}
+              gif={gif.gif}
+              logedInUser={user}
+              likesamount={gif.likes.length}
+            />
+          </>
         )}
         <button
           style={{ borderRadius: "50%", width: 100, height: 100 }}
@@ -79,3 +79,7 @@ export default function Main() {
     </>
   );
 }
+
+Main.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

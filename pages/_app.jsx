@@ -1,4 +1,4 @@
-import { UserProvider } from "../components/UserContext";
+/*import { UserProvider } from "../components/UserContext";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -6,6 +6,18 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </UserProvider>
   );
+}
+
+export default MyApp;
+*/
+
+import { UserProvider } from "../components/UserContext";
+
+function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page);
+
+  return <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>;
 }
 
 export default MyApp;

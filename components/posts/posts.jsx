@@ -13,6 +13,11 @@ const Post = ({ username, caption, gif, logedInUser, id, likesamount }) => {
 
   const router = useRouter();
 
+  const [likesamount2, setlikesamount2] = useState(likesamount);
+  useEffect(() => {
+    setlikesamount2(likesamount);
+  }, [likesamount]);
+
   //need to get the username picture that he uploaded the gif
   useEffect(() => {
     const fetchUser = async () => {
@@ -40,7 +45,12 @@ const Post = ({ username, caption, gif, logedInUser, id, likesamount }) => {
       `http://localhost:3001/api/posts/addlike/${id}/${logedInUser._id}`
     );
     if (response.data) {
-      console.log(liked);
+      if (liked == false) {
+        setlikesamount2(likesamount2 + 1);
+      } else {
+        setlikesamount2(likesamount2 - 1);
+      }
+
       setLiked(!liked);
     } else {
       console.log("error adding like");
@@ -62,7 +72,7 @@ const Post = ({ username, caption, gif, logedInUser, id, likesamount }) => {
 
         <h4 className={style.post__caption}>{caption}</h4>
       </div>
-
+      <h5>likes:{likesamount2}</h5>
       <div className={style.post__like_comment}>
         {logedInUser != null && (
           <>
@@ -70,7 +80,7 @@ const Post = ({ username, caption, gif, logedInUser, id, likesamount }) => {
               onClick={() => addlike()}
               className={liked ? style.liked : style.nolike}
             >
-              Like
+              {liked ? "Unlike" : "Like"}
             </button>
             <button
               onClick={() => router.push(`/comment/${id}/comment`)}

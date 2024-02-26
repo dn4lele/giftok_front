@@ -5,6 +5,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useUser } from "../../components/UserContext";
+import Layout from "../../components/layout";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function AddPost() {
   const [selectgif, setselectgif] = useState(false);
@@ -67,12 +70,15 @@ export default function AddPost() {
       );
     }
   };
-
+  const [isLoading, setIsLoading] = useState(false);
   async function getgifs(search) {
+    setIsLoading(true);
     let gifs = await axios.get(
       `http://localhost:3001/api/posts/getgifs/${search}`
     );
+
     setGifs(gifs.data);
+    setIsLoading(false);
   }
 
   function pickedgif(gif) {
@@ -102,6 +108,25 @@ export default function AddPost() {
 
   return (
     <>
+      {isLoading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(255, 255, 255, 0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       {selectgif == true && (
         <>
           <div className={style.header}>
@@ -111,7 +136,9 @@ export default function AddPost() {
               className={style.inp}
             />
             <button
-              onClick={() => getgifs(gifserach)}
+              onClick={() => {
+                getgifs(gifserach);
+              }}
               className={style.selectgifbtn}
             >
               search
@@ -180,3 +207,7 @@ export default function AddPost() {
     </>
   );
 }
+
+AddPost.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

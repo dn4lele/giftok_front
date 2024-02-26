@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./comment.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Navbar from "../../../components/Navbar/navbar";
+import Layout from "../../../components/layout";
 
 export default function Comment() {
   const router = useRouter();
@@ -72,7 +72,6 @@ export default function Comment() {
 
   return (
     <div>
-      <Navbar />
       <center>
         <h1>Comment</h1>
         <div className={style.gif}>
@@ -118,3 +117,6 @@ export default function Comment() {
     </div>
   );
 }
+Comment.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};

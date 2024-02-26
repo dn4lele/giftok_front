@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar/navbar";
+
 import axios from "axios";
 import { useUser } from "../../components/UserContext";
 import style from "./top.module.css";
 import Post from "../../components/posts/posts";
+import Layout from "../../components/layout";
 
 export default function Top() {
   const router = useRouter();
@@ -45,7 +46,6 @@ export default function Top() {
 
   return (
     <>
-      <Navbar />
       <h1>Top {top_slug == 1 ? "follower person" : "Post"}</h1>
       {top_slug == 1 && (
         <>
@@ -55,6 +55,7 @@ export default function Top() {
                 <h1>{user.name}</h1>
                 <img src={user.image} alt={user.name} />
                 <button
+                  className={style.profbtn}
                   onClick={() => router.push(`/prof/${user._id}/profile`)}
                 >
                   see profile
@@ -77,6 +78,7 @@ export default function Top() {
                       caption={gif.description}
                       gif={gif.gif}
                       logedInUser={user}
+                      likesamount={gif.likes.length}
                     />
                   </>
                 )}
@@ -88,3 +90,7 @@ export default function Top() {
     </>
   );
 }
+
+Top.getLayout = function getLayout(page) {
+  return <Layout>{page}</Layout>;
+};
