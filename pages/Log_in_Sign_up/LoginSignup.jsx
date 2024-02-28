@@ -86,7 +86,7 @@ const LoginSignup = () => {
               <img src="/email.png" alt="email icon" />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder={action == "Login" ? "Email/Username" : "Email"}
                 onChange={(e) => setemail(e.target.value)}
               />
             </div>

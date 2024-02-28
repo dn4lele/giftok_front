@@ -4,11 +4,14 @@ import { useUser } from "../UserContext";
 import DropDownProfile from "../dropdown/dropDownProfile";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Topthings from "../topThingsDropDown/topThingsDropDown";
 
 export default function Navbar() {
   const { user } = useUser();
 
   const [showstting, setshowstting] = useState(false);
+
+  const [showtop, setshowtop] = useState(false);
 
   const router = useRouter();
 
@@ -39,22 +42,18 @@ export default function Navbar() {
           <Link href="/">
             <img src={"/logo.png"} alt="Logo" className={styles.pictures} />
           </Link>
-          {user && (
-            <>
-              <button
-                onClick={() => router.push("/top/1")}
-                className={styles.top}
-              >
-                top following person you follow
-              </button>
-              <button
-                onClick={() => router.push("/top/2")}
-                className={styles.top}
-              >
-                top liked post also you liked
-              </button>
-            </>
-          )}
+
+          <button
+            className={styles.top}
+            onClick={() => {
+              setshowtop(!showtop);
+              console.log(showtop);
+            }}
+          >
+            top things
+          </button>
+
+          {showtop && <Topthings />}
         </div>
 
         <div className={styles.rounded}>

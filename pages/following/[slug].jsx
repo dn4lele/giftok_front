@@ -44,7 +44,7 @@ export default function Search() {
           {data.map((user) => (
             <div className={style.singleuser}>
               <h1>{user.following.name}</h1>
-              <img src={user.following.image} alt={user.following.name} />
+              <img src={user.following.image} alt={user.following.name}  className={style.userprofilepic} />
               <button
                 className={style.profbtn}
                 onClick={() =>

@@ -76,7 +76,11 @@ export default function Search() {
             {data.map((user) => (
               <div className={style.singleuser}>
                 <h1>{user.name}</h1>
-                <img src={user.image} alt={user.name} />
+                <img
+                  src={user.image}
+                  alt={user.name}
+                  className={style.userprofilepic}
+                />
                 <button
                   className={style.profbtn}
                   onClick={() => router.push(`/prof/${user._id}/profile`)}
